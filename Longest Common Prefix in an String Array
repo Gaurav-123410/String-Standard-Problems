@@ -1,0 +1,59 @@
+class Solution{
+  public:
+    
+    string longestCommonPrefix (string arr[], int N)
+    {
+        //METHOD- 1
+        //first se compare kr krke substring bnaunga
+        string str = arr[0];
+        int len = str.length();
+        string ans;
+        
+        for(int i = 1; i< len ; i++){
+            //find function se substring ka index mil jayega agar substring bni hogi to. Aur mughe to starting se hi chahiye isliye 0 ki condition
+            while(arr[i].find(str) != 0){ //index 0 nhi h to m str ki lenth ko minus krunga
+                str = str.substr(0, len-1);
+                len--;
+                
+                //if len minus krte krte string empty ho gyi to mtlb kuch mila hi nhi 
+                if(str.empty()){
+                    return "-1";
+                }
+                
+            }
+        }
+        return str;
+        
+        //METHOD -2
+        //SORT KRKE 
+        if(N == 0){
+            return "";
+        }
+        if(N == 1){
+            return arr[0];
+        }
+        //sort the string
+        sort(arr, arr+N);
+        //ab first aur last string m minimum length wali le lo
+        int mini = min(arr[0].size(), arr[N-1].size());
+        string first = arr[0];
+        string last = arr[N-1];
+        //mini tk loop chalao aur check krte hue
+        int i = 0;
+        while(i < mini && first[i] == last[i]){
+            i++;
+            
+            
+        }
+        //i tk hi valid answe h to i tk ki substring bna di 
+        string pre = first.substr(0, i);
+        if(pre.length() != 0){
+            return pre;
+        }
+        return "-1";
+        
+        
+        
+        
+    }
+};
